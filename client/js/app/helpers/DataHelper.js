@@ -7,7 +7,6 @@ class DataHelper {
     }
 
     static textToDate(text){
-        console.log(text);
         if(!/^\d{4}-\d{2}-\d{2}$/.test(text)){
             throw Error('Data deve estar no formato aaaa-mm-dd');
         }

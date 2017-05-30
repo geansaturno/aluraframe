@@ -8,7 +8,6 @@ class ListaNegociacoes {
 
     addNegociacao(negociacao){
         this._negociacoes.push(negociacao);
-        console.log(this._negociacoes);
     }
 
     get negociacoes() {
