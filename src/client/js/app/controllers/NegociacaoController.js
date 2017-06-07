@@ -18,7 +18,7 @@ class NegociacaoController {
                     return function(){
                         Reflect.apply(target[prop], target, arguments);
                         self._negociacoesView.render(target.negociacoes);
-                    }
+                    };
                 }
                 return Reflect.get(target, prop, receiver);
             }
