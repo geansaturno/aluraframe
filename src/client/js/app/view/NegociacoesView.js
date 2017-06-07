@@ -16,7 +16,7 @@ class NegociacoesView extends View{
 
                 <tbody>
                 </tbody>
-                    ${model.map(n => `
+                    ${model.negociacoes.map(n => `
                         <tr>
                             <td>${DataHelper.dateToText(n.data)}</td>
                             <td>${n.quantidade}</td>
@@ -29,7 +29,7 @@ class NegociacoesView extends View{
                 <tfoot>
                     <td colspan="3"></td>
                     <td>
-                        ${model.reduce((total, n) => total + n.volume, 0.0)}
+                        ${model.negociacoes.reduce((total, n) => total + n.volume, 0.0)}
                     </td>
                 </tfoot>
             </table>
