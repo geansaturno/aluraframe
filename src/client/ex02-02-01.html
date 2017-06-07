@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+
+            class Funcionario {
+
+                constructor(email) {
+                    this._email = email;
+                }
+
+                get email() {
+                    console.log(this);
+                    return this._email;
+                }
+
+                set email(email) {
+                    this._email = email;
+                }
+            }
+
+            let funcionario = {email: "funcionario@inc.com"};
+
+            let funcionarioProxy = new Proxy(funcionario, {
+                get(target, prop, receiver) {
+
+                    console.log('Armadilha aqui');
+                    // return Reflect.get(target, prop, receiver);
+                    return `**${Reflect.get(target, prop, receiver)}**`;
+                },
+
+                set(target, prop, val, receiver){
+                    console.log(`Antes: ${target[prop]} - Depois ${val}`);
+                    return Reflect.set(target, prop, val, receiver);
+                }
+            });
+
+            let funcionarioClassProxy = new Proxy(new Funcionario('funcionarioclass@inc.com'), {
+                get(target, prop, receiver) {
+                    console.log('Armadilha da classe aqui');
+                    console.log(prop);
+                    return Reflect.get(target, prop, receiver);
+                },
+
+                set(target, prop, val, receiver){
+                    console.log(`Prop: ${prop} Antes ${target[prop]} - Depois ${val}`);
+                    return Reflect.set(target, prop, val, receiver);
+                }
+            });
+
+            console.group('Proxy');
+                console.log(funcionarioProxy.email);
+                funcionarioProxy.email = 'meuemail@email.com.br';
+                console.log(funcionarioProxy.email);
+            console.groupEnd();
+
+            console.group('Class');
+                console.log(funcionarioClassProxy.email);
+                funcionarioClassProxy.email = "emaildaclasse@gmail.com.br";
+                console.log(funcionarioClassProxy.email);
+            console.groupEnd();
+
+        </script>
+    </body>
+</html>

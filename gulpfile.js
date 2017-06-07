@@ -12,7 +12,7 @@ g.task('server', () => {
         }
     });
 
-    g.watch('client/**/*', browserSync.reload);
+    g.watch('src/client/**/*', browserSync.reload);
 });
 
 g.task('server-build', () => {

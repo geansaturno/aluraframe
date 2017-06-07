@@ -8,6 +8,12 @@ class ListaNegociacoes {
 
     addNegociacao(negociacao){
         this._negociacoes.push(negociacao);
+        if(this._callback) this._callback(this._negociacoes);
+    }
+
+    esvazia() {
+        this._negociacoes = [];
+        if(this._callback) this._callback(this._negociacoes);
     }
 
     get negociacoes() {
