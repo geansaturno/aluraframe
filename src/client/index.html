@@ -37,7 +37,7 @@
     </form>
 
     <div class="text-center">
-        <button class="btn btn-primary text-center" type="button">
+        <button class="btn btn-primary text-center" type="button" onclick="negociacao.importarNegociacoes()">
             Importar Negociações
         </button>
         <button class="btn btn-primary text-center" type="button" onclick="negociacao.apagar()">
@@ -58,6 +58,7 @@
     <script src="js/app/models/ListaNegociacoes.js"></script>
     <script src="js/app/models/Mensagem.js"></script>
     <script src="js/app/services/ProxyFactory.js"></script>
+    <script src="js/app/services/NegociacaoService.js"></script>
     <script src="js/app/view/View.js"></script>
     <script src="js/app/view/NegociacoesView.js"></script>
     <script src="js/app/view/MensagemView.js"></script>

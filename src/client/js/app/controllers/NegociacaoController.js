@@ -30,10 +30,24 @@ class NegociacaoController {
     apagar() {
 
         this._listaNegociacoes.esvazia();
-
         this._mensagem.texto = 'Negociaçõs apagadas';
-        this._mensagemView.render(this._mensagem);
+    }
 
+    importarNegociacoes() {
+
+        let negociacaoService = new NegociacaoService();
+
+        negociacaoService.negociacoesDaSemana((err, negociacoes) => {
+
+            if(err){
+                this._mensagem.texto = err;
+                return;
+            }
+
+            negociacoes.forEach(negociacao => this._listaNegociacoes.addNegociacao(negociacao));
+        });
+
+        this._mensagem.texto = 'Negociações importadas com sucesso';
     }
 
     _limpaFormulario(){
