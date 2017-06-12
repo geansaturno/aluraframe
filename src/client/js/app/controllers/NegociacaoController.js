@@ -9,7 +9,9 @@ class NegociacaoController {
         this._inputValor        = $('#valor');
         this._inputQuantidade   = $('#quantidade');
 
-        this._listaNegociacoes  = new Bind(new ListaNegociacoes(), new NegociacoesView($('#negociacoes')), 'addNegociacao', 'esvazia');
+        this._ordemAtual = '';
+
+        this._listaNegociacoes  = new Bind(new ListaNegociacoes(), new NegociacoesView($('#negociacoes')), 'addNegociacao', 'esvazia', 'ordenar', 'inverteOrdem');
 
         this._mensagem = new Bind(new Mensagem(), new MensagemView($('#mensagemView')), 'texto');
     }
@@ -17,14 +19,19 @@ class NegociacaoController {
     adicionar(event){
         event.preventDefault();
 
-        let negociacao = new Negociacao(DataHelper.textToDate(this.data), this.quantidade, this.valor);
+        try {
+            let negociacao = new Negociacao(DataHelper.textToDate(this.data), this.quantidade, this.valor);
 
-        this._listaNegociacoes.addNegociacao(negociacao);
+            this._listaNegociacoes.addNegociacao(negociacao);
 
-        this._limpaFormulario();
-        this._inputData.focus();
+            this._limpaFormulario();
+            this._inputData.focus();
 
-        this._mensagem.texto = 'Negociação adicionada com sucesso';
+            this._mensagem.texto = 'Negociação adicionada com sucesso';
+
+        } catch (error) {
+            this._mensagem.texto = error;
+        }
     }
 
     apagar() {
@@ -43,6 +50,16 @@ class NegociacaoController {
             this._mensagem.texto = "Negociações importadas com sucesso"
         })
         .catch(error => this._mensagem.texto = error);
+    }
+
+    ordenar(coluna){
+        if(this._ordemAtual == coluna){
+            this._listaNegociacoes.inverteOrdem();
+        } else {
+            this._listaNegociacoes.ordenar((a, b) => a[coluna] - b[coluna]);
+        }
+
+        this._ordemAtual = coluna;
     }
 
     _limpaFormulario(){

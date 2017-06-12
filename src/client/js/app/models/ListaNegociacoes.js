@@ -16,6 +16,14 @@ class ListaNegociacoes {
         if(this._callback) this._callback(this._negociacoes);
     }
 
+    ordenar(criterio) {
+        this._negociacoes.sort(criterio);
+    }
+
+    inverteOrdem(){
+        this._negociacoes.reverse();
+    }
+
     get negociacoes() {
         return [].concat(this._negociacoes);
     }

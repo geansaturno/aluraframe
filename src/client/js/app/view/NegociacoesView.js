@@ -7,10 +7,10 @@ class NegociacoesView extends View{
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>DATA</th>
-                        <th>QUANTIDADE</th>
-                        <th>VALOR</th>
-                        <th>VOLUME</th>
+                        <th onclick="negociacao.ordenar('data')">DATA</th>
+                        <th onclick="negociacao.ordenar('quantidade')">QUANTIDADE</th>
+                        <th onclick="negociacao.ordenar('valor')">VALOR</th>
+                        <th onclick="negociacao.ordenar('volume')">VOLUME</th>
                     </tr>
                 </thead>
 
@@ -23,7 +23,6 @@ class NegociacoesView extends View{
                             <td>${n.valor}</td>
                             <td>${n.volume}</td>
                         </tr>
-
                         `).join('')
                     }
                 <tfoot>
